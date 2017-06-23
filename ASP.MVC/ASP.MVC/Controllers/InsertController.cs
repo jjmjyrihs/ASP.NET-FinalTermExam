@@ -6,9 +6,10 @@ using System.Web.Mvc;
 
 namespace ASP.MVC.Controllers
 {
-    public class HomeController : Controller
+    public class InsertController : Controller
     {
-        public ActionResult Index()
+        // GET: Insert
+        public ActionResult Show()
         {
             Service.SQL_GetCodeTable SGCT = new Service.SQL_GetCodeTable();
             List<Model.Data> GetCodeTable = new List<Model.Data>();
@@ -16,6 +17,14 @@ namespace ASP.MVC.Controllers
             FillCodeTable(GetCodeTable);
             return View();
         }
+
+        public ActionResult Do(Model.Data Data)
+        {
+            return null;
+        }
+
+
+
 
         public void FillCodeTable(List<Model.Data> Data)
         {

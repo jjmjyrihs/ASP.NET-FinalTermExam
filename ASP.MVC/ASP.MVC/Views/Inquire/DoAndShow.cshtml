@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "DoAndShow";
+}
+
+
+<script>
+    function check() {
+        var r = confirm("是否刪除");
+        if (r == true) {
+            document.getElementById("delete").submit();
+        }
+    }
+
+</script>
+
+
+
+
+
+
+<table style="border:3px #cccccc solid;" cellpadding="10" border="1" align="center">
+    <tr>
+        <td>客戶編號</td>
+        <td>客戶名稱</td>
+        <td>聯絡人姓名</td>
+        <td>聯絡人職稱</td>
+        <td>修改資料</td>
+        <td>刪除客戶</td>
+    </tr>
+    @for (int i = 0; i < ((List<Model.Data>)ViewBag.GetData).Count; i++)
+    {
+        <tr>
+            <td  style="text-align:right">@ViewBag.GetData[i].CustomerID</td>
+            <td style="text-align:left">@ViewBag.GetData[i].CompanyName</td>
+            <td style="text-align:left">@ViewBag.GetData[i].ContactName</td>
+            <td style="text-align:left">@ViewBag.GetData[i].ContactTitle</td>
+
+            @using (Html.BeginForm("Do", "Update", FormMethod.Post))
+            {
+                <td>                                        
+                    <input type="submit" value="修改" />
+                </td>
+            }
+
+            @using (Html.BeginForm("Do", "Delete", FormMethod.Post, new { id = "delete"} ))
+            {
+                <td>                    
+                    <input type="hidden" name="CustomerID" value="@ViewBag.GetData[i].CustomerID" />
+                    <input type="button" value="刪除" onclick="check()"/>
+                </td>
+
+            }
+        </tr>
+
+    }
+</table>
